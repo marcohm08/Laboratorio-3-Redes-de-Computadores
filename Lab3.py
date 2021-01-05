@@ -145,16 +145,20 @@ if __name__ == "__main__":
     f = 20000
 
     waveAM.signalExtract(f)
+    AmCarrierData = amCarrier(waveAM.sampleTimeRange,f)
+    carrierTransform = fft(AmCarrierData)
     waveAM.amModulation(f)
     waveAM.plotGraph(3,waveAM.timeDomain,waveAM.data,xLabel="tiempo(s)",yLabel="f(t)",title = 'Grafico de la señal modulada AM en funcion del tiempo')
     waveAM.fourierTransform()
     waveAM.plotGraph(4,waveAM.freqDomain,np.abs(waveAM.fourierData),xLabel="Frecuencias(Hz)",yLabel="F(w)",title = 'Transformada de Fourier de señal modulada AM')
+    waveAM.plotGraph(5,waveAM.timeDomain,AmCarrierData,xLabel="tiempo(s)",yLabel="f(t)",title = 'Grafico de la señal portadora en funcion del tiempo')
+    waveAM.plotGraph(6,waveAM.freqDomain,np.abs(carrierTransform),xLabel="Frecuencias(Hz)",yLabel="F(w)",title = 'Transformada de Fourier señal portadora')
 
     waveAM.amDemodulation(f, 4000)
-    waveAM.plotGraph(5,waveAM.freqDomain,np.abs(waveAM.fourierData),xLabel="Frecuencias(Hz)",yLabel="F(w)",title = 'Transformada de Fourier de señal demodulada AM')
+    waveAM.plotGraph(7,waveAM.freqDomain,np.abs(waveAM.fourierData),xLabel="Frecuencias(Hz)",yLabel="F(w)",title = 'Transformada de Fourier de señal demodulada AM')
     plt.xlim([-4000,4000])
 
-    waveAM.plotGraph(6,waveAM.timeDomain,waveAM.data.real,xLabel="tiempo(s)",yLabel="f(t)",title = 'Grafico de la señal en funcion del tiempo demodulada')
+    waveAM.plotGraph(8,waveAM.timeDomain,waveAM.data.real,xLabel="tiempo(s)",yLabel="f(t)",title = 'Grafico de la señal en funcion del tiempo demodulada')
 
     waveAM.write("Señal_AM.wav")
 
@@ -164,8 +168,8 @@ if __name__ == "__main__":
     waveFM.readWavFile("Laboratorio-3-Redes-de-Computadores/prueba.wav")
     waveFM.signalExtract(fm)
     waveFM.fmModulation(fm)
-    waveAM.plotGraph(7,waveFM.timeDomain,np.abs(waveFM.data),xLabel="Frecuencias(Hz)",yLabel="F(w)",title = 'Grafico de la señal modulada FM en funcion del tiempo')
+    waveAM.plotGraph(9,waveFM.timeDomain,np.abs(waveFM.data),xLabel="Frecuencias(Hz)",yLabel="F(w)",title = 'Grafico de la señal modulada FM en funcion del tiempo')
     waveFM.fourierTransform()
-    waveFM.plotGraph(8,waveFM.freqDomain,np.abs(waveFM.fourierData),xLabel="Frecuencias(Hz)",yLabel="F(w)",title = 'Transformada de Fourier de señal modulada FM')
+    waveFM.plotGraph(10,waveFM.freqDomain,np.abs(waveFM.fourierData),xLabel="Frecuencias(Hz)",yLabel="F(w)",title = 'Transformada de Fourier de señal modulada FM')
 
     plt.show()
