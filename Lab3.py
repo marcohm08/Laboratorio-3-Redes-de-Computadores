@@ -10,14 +10,11 @@ from scipy import interpolate
 from scipy import integrate
 from scipy.io import wavfile
 from scipy.fftpack import fft,fftshift,fftfreq,ifft
-from PIL import Image
 
 import numpy as np
 import matplotlib.pyplot as plt
 
 import copy
-
-import sys
 
 # AM Carrier signal function
 # Input:
@@ -150,11 +147,11 @@ if __name__ == "__main__":
     AmCarrierData = amCarrier(waveAM.sampleTimeRange,f)
     carrierTransform = fft(AmCarrierData)
     waveAM.amModulation(f)
-    waveAM.plotGraph(3,waveAM.timeDomain,waveAM.data,xLabel="tiempo(s)",yLabel="f(t)",title = 'Grafico de la señal modulada AM en funcion del tiempo')
     waveAM.fourierTransform()
-    waveAM.plotGraph(4,waveAM.freqDomain,np.abs(waveAM.fourierData),xLabel="Frecuencias(Hz)",yLabel="F(w)",title = 'Transformada de Fourier de señal modulada AM')
-    waveAM.plotGraph(5,waveAM.timeDomain,AmCarrierData,xLabel="tiempo(s)",yLabel="f(t)",title = 'Grafico de la señal portadora en funcion del tiempo')
-    waveAM.plotGraph(6,waveAM.freqDomain,np.abs(carrierTransform),xLabel="Frecuencias(Hz)",yLabel="F(w)",title = 'Transformada de Fourier señal portadora')
+    waveAM.plotGraph(3,waveAM.timeDomain,AmCarrierData,xLabel="tiempo(s)",yLabel="f(t)",title = 'Grafico de la señal portadora en funcion del tiempo')
+    waveAM.plotGraph(4,waveAM.freqDomain,np.abs(carrierTransform),xLabel="Frecuencias(Hz)",yLabel="F(w)",title = 'Transformada de Fourier señal portadora')
+    waveAM.plotGraph(5,waveAM.timeDomain,waveAM.data,xLabel="tiempo(s)",yLabel="f(t)",title = 'Grafico de la señal modulada AM en funcion del tiempo')
+    waveAM.plotGraph(6,waveAM.freqDomain,np.abs(waveAM.fourierData),xLabel="Frecuencias(Hz)",yLabel="F(w)",title = 'Transformada de Fourier de señal modulada AM')
 
     # AM demodulation
     waveAM.amDemodulation(f, 4000)
